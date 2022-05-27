@@ -38,7 +38,6 @@ myVideo.id = "myvideo";
 myVideo.muted = true;
 const peers = {};
 var myid = 0;
-// let editor = document.querySelector("#code");
 var codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   mode: "text/x-perl",
@@ -70,12 +69,10 @@ navigator.mediaDevices
     myVideoStream = stream;
     addVideoStream(myVideodiv, myVideo, stream);
 
-    //if i receive a call  i have to answer it
-    myPeer.on("call", (call) => {
+     myPeer.on("call", (call) => {
       call.answer(stream);
       // console.log(call.peer);
 
-      //when i get the other user stream i will add that stream to my window
       const videodiv = document.createElement("div");
       videodiv.id = `videodiv-${call.peer}`;
       videodiv.className = "videodiv";
@@ -85,7 +82,6 @@ navigator.mediaDevices
       });
     });
 
-    //receiving
     socket.on("user-connected", (userId) => {
       setTimeout(function () {
         connectToNewUser(userId, stream);
@@ -98,10 +94,7 @@ codeArea.on("keydown", (cm) => {
   socket.emit("code", text);
 });
 
-input.addEventListener("keydown", (evt) => {
-  const text = input.value;
-  socket.emit("inpmsg", text);
-});
+
 
 socket.on("code", (data) => {
   codeArea.getDoc().setValue(data);
@@ -118,7 +111,6 @@ socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
 });
 
-//************************************* connect to new user function **********************************************/
 function connectToNewUser(userId, stream) {
   console.log(`connected to user id : ${userId}`);
 
