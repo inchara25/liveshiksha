@@ -1,0 +1,29 @@
+{
+  "name": "liveshiksha",
+  "version": "1.0.0",
+  "description": "live coding platform for unis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoaibahmed9138/liveshiksha.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shoaibahmed9138/liveshiksha/issues"
+  },
+  "homepage": "https://github.com/shoaibahmed9138/liveshiksha#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "peer": "^0.6.1",
+    "peerjs": "^1.4.6",
+    "socket.io": "^4.5.1",
+    "uuid": "^8.3.2"
+  }
+}
