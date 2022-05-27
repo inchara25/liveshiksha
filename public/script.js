@@ -81,7 +81,7 @@ navigator.mediaDevices
     socket.on("user-connected", (userId) => {
       setTimeout(function () {
         connectToNewUser(userId, stream);
-      }, 4000);
+      }, 6000 );
     });
   });
 
@@ -93,6 +93,7 @@ codeArea.on("keydown", (cm) => {
 input.addEventListener("keydown", (evt) => {
   const text = input.value;
   socket.emit("inpmsg", text);
+  console.log("socket ip");
 });
 
 socket.on("code", (data) => {
@@ -100,9 +101,11 @@ socket.on("code", (data) => {
 });
 socket.on("inpmsg", (data) => {
   input.value = data;
+  console.log("received")
 });
 socket.on("outmsg", (data) => {
   output.value = data;
+  console.log("received in console here bruh")
 });
 socket.on("user-disconnected", (userId) => {
   if (peers[userId]) peers[userId].close();
