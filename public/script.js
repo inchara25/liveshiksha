@@ -38,6 +38,12 @@ myVideo.id = "myvideo";
 myVideo.muted = true;
 const peers = {};
 var myid = 0;
+
+function handleThemeChange(val)
+{
+    console.log(val)
+}
+
 var codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   mode: "text/x-perl",
