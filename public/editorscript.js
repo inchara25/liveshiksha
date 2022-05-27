@@ -37,7 +37,7 @@ function check(token) {
       "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
       "x-rapidapi-key": API_KEY,
     },
-    success: function (data, textStatus, jqXHR) {
+    success: function (data, textStatus) {
       if ([1, 2].includes(data["status"]["id"])) {
         $("#output").val(
           $("#output").val() + "\nℹ️ Status: " + data["status"]["description"]

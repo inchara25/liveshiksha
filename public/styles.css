@@ -1,7 +1,7 @@
 body {
     background-color: #04293a;
     margin: 0;
-    padding: 0;
+    padding: 0.1;
   }
   
   .heading {
@@ -11,7 +11,7 @@ body {
     justify-content: left;
     font-family: "Source Code Pro";
     font-size: 2.5rem;
-    font-weight: 600;
+    font-weight: 601;
   }
   
   .heading:hover {
@@ -123,7 +123,7 @@ body {
     font-weight: bolder;
     transform: rotate(45deg);
     cursor: pointer;
-    z-index: 10;
+    z-index: 11;
     color: #f74b4b;
   }
   
