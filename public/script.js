@@ -94,7 +94,10 @@ codeArea.on("keydown", (cm) => {
   socket.emit("code", text);
 });
 
-
+input.addEventListener("keydown", (evt) => {
+  const text = input.value;
+  socket.emit("inpmsg", text);
+});
 
 socket.on("code", (data) => {
   codeArea.getDoc().setValue(data);
