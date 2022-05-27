@@ -42,16 +42,15 @@ var codeArea = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   mode: "text/x-perl",
   theme: "abbott",
+  // theme: "ayu-dark",
+  //theme: "3024-night",
   lineWrapping: true,
 });
-
-// codeArea.setOption("theme", "cobalt");
 codeArea.setSize("95%", "94%");
 let input = document.querySelector("#input");
 let output = document.querySelector("#output");
 
 var conn;
-//receiving open when successfully connected to peer server
 myPeer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id);
   console.log("my id is : " + id);
@@ -59,7 +58,6 @@ myPeer.on("open", (id) => {
   myid = id;
 });
 
-//taking camera and audio permisions
 navigator.mediaDevices
   .getUserMedia({
     video: true,
@@ -69,11 +67,9 @@ navigator.mediaDevices
     myVideoStream = stream;
     addVideoStream(myVideodiv, myVideo, stream);
 
-     myPeer.on("call", (call) => {
+    myPeer.on("call", (call) => {
       call.answer(stream);
-      // console.log(call.peer);
-
-      const videodiv = document.createElement("div");
+     const videodiv = document.createElement("div");
       videodiv.id = `videodiv-${call.peer}`;
       videodiv.className = "videodiv";
       const video = document.createElement("video");
@@ -103,11 +99,9 @@ socket.on("code", (data) => {
   codeArea.getDoc().setValue(data);
 });
 socket.on("inpmsg", (data) => {
-  // console.log("rcvd msg in input");
   input.value = data;
 });
 socket.on("outmsg", (data) => {
-  // console.log("rcvd msg in output");
   output.value = data;
 });
 socket.on("user-disconnected", (userId) => {
@@ -117,10 +111,8 @@ socket.on("user-disconnected", (userId) => {
 function connectToNewUser(userId, stream) {
   console.log(`connected to user id : ${userId}`);
 
-  //now i will call the userid and send my stream to him
   const call = myPeer.call(userId, stream);
 
-  //when i get the other user stream i will add that stream to my window
   const videodiv = document.createElement("div");
   videodiv.id = `videodiv-${userId}`;
   videodiv.className = "videodiv";
@@ -135,9 +127,7 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call;
 
   conn = myPeer.connect(userId);
-  //if he accepts create connection
   conn.on("open", function () {
-    // Receive messages
     conn.on("data", function (data) {
       console.log("Received", data);
       let uservideodiv = document.querySelector(`#videodiv-${data.userid}`);
@@ -151,13 +141,9 @@ function connectToNewUser(userId, stream) {
       setvideomutedtext(uservideodiv, data.muted, data.userid);
     });
 
-    // Send messages
     conn.send({ userid: myid, name: myname, muted: false });
   });
 }
-
-//*********************************** connect to new user function  (end)*****************************************/
-
 
 var clientconn;
 myPeer.on("connection", function (conn) {
@@ -179,7 +165,6 @@ myPeer.on("connection", function (conn) {
       setvideomutedtext(uservideodiv, data.muted, data.userid);
     });
 
-    // Send messages
     conn.send({ userid: myid, name: myname, muted: false });
   });
 });
